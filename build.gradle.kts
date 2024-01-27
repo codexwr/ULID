@@ -5,7 +5,8 @@ plugins {
     `maven-publish`
 }
 
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+val javaVersion = JavaVersion.VERSION_1_8
+java.sourceCompatibility = javaVersion
 
 group = "com.chans.codexwr"
 version = "1.0.0"
@@ -23,7 +24,7 @@ dependencies {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs += listOf("-Xjsr305=strict", "-Xjvm-default=all", "-Xemit-jvm-type-annotations")
-        jvmTarget = "1.8"
+        jvmTarget = javaVersion.toString()
     }
 }
 
@@ -32,7 +33,7 @@ tasks.test {
 }
 
 kotlin {
-    jvmToolchain(8)
+    jvmToolchain(javaVersion.majorVersion.toInt())
 }
 
 tasks.jar {
@@ -55,7 +56,7 @@ val sourceJar by tasks.registering(Jar::class) {
 
 publishing {
     publications {
-        create<MavenPublication>("mavenJava") {
+        register<MavenPublication>("mavenJava") {
             groupId = project.group.toString()
             artifactId = project.name.lowercase()
             version = project.version.toString()
@@ -66,8 +67,12 @@ publishing {
     }
     repositories {
         maven {
-            name = "MavenCentral"
-            url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            name = "GitHubPackages" //GitHub Package Repository
+            url = uri(project.findProperty("gpr.url") as? String? ?: System.getenv("GPR_URL"))
+            credentials {
+                username = project.findProperty("gpr.username") as? String? ?: System.getenv("GPR_USERNAME")
+                password = project.findProperty("gpr.password") as? String? ?: System.getenv("GPR_PASSWORD")
+            }
         }
     }
 }
