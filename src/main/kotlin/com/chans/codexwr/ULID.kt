@@ -9,7 +9,8 @@ class ULID(private val random: Random = SecureRandom()) {
 
     class Value(val mostSignificantBits: Long, val leastSignificantBits: Long) : Comparable<Value>, Serializable {
         companion object {
-            private const val serialVersionUID = -3563159514112487717L
+            @Suppress("ConstPropertyName")
+            private const val serialVersionUID: Long = -9047506782422892070L
         }
 
         val timestamp get() = mostSignificantBits ushr 16
@@ -75,7 +76,6 @@ class ULID(private val random: Random = SecureRandom()) {
 
             return String(buffer)
         }
-
     }
 
     companion object {
@@ -203,8 +203,12 @@ class ULID(private val random: Random = SecureRandom()) {
 
             var msb = 0L
             var lsb = 0L
-            for (i in 0 until 8) { msb = (msb shl 8) or (data[i].toInt() and 0xFF).toLong() }
-            for (i in 8 until 16) { lsb = (lsb shl 8) or (data[i].toInt() and 0xFF).toLong() }
+            for (i in 0 until 8) {
+                msb = (msb shl 8) or (data[i].toInt() and 0xFF).toLong()
+            }
+            for (i in 8 until 16) {
+                lsb = (lsb shl 8) or (data[i].toInt() and 0xFF).toLong()
+            }
 
             return Value(msb, lsb)
         }
