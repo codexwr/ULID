@@ -196,7 +196,8 @@ class ULID(private val random: Random = SecureRandom()) {
             internalAppendCrockford(builder, random.nextLong(), 8)
         }
 
-        fun fromUUID(uuid: UUID) = Value(uuid.mostSignificantBits, uuid.leastSignificantBits)
+        fun fromUUID(uuid: UUID) =
+            Value(uuid.mostSignificantBits, uuid.leastSignificantBits).also { checkTimestamp(it.timestamp) }
 
         fun fromBytes(data: ByteArray): Value {
             if (data.size != 16) throw IllegalArgumentException("data must be 16 bytes in length!")
@@ -210,7 +211,7 @@ class ULID(private val random: Random = SecureRandom()) {
                 lsb = (lsb shl 8) or (data[i].toInt() and 0xFF).toLong()
             }
 
-            return Value(msb, lsb)
+            return Value(msb, lsb).also { checkTimestamp(it.timestamp) }
         }
 
         fun parseULID(ulidStirng: String): Value {
@@ -231,7 +232,33 @@ class ULID(private val random: Random = SecureRandom()) {
             return Value(msb, lsb)
         }
 
+        private val ulidInstance = ULID()
+        fun appendULID(stringBuilder: StringBuilder) = ulidInstance.appendULID(stringBuilder)
+        fun nextULID(timestamp: Long = System.currentTimeMillis()) = ulidInstance.nextULID(timestamp)
+        fun nextValue(timestamp: Long = System.currentTimeMillis()) = ulidInstance.nextValue(timestamp)
 
+        /**
+         * Returns the next monotonic value. If an overflow happened while incrementing
+         * the random part of the given previous ULID value then the returned value will
+         * have a zero random part.
+         *
+         * @param previousUlid the previous ULID value.
+         * @param timestamp the timestamp of the next ULID value.
+         * @return the next monotonic value.
+         */
+        fun nextMonotonicValue(previousUlid: Value, timestamp: Long = System.currentTimeMillis()) =
+            ulidInstance.nextMonotonicValue(previousUlid, timestamp)
+
+        /**
+         * Returns the next monotonic value or empty if an overflow happened while incrementing
+         * the random part of the given previous ULID value.
+         *
+         * @param previousUlid the previous ULID value.
+         * @param timestamp the timestamp of the next ULID value.
+         * @return the next monotonic value or empty if an overflow happened.
+         */
+        fun nextStrictlyMonotonicValue(previousUlid: Value, timestamp: Long) =
+            ulidInstance.nextStrictlyMonotonicValue(previousUlid, timestamp)
     }
 
     fun appendULID(stringBuilder: StringBuilder) {
