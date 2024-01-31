@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.9.21"
     `maven-publish`
+    `java-library`
 }
 
 val javaVersion = JavaVersion.VERSION_1_8
@@ -36,6 +37,10 @@ kotlin {
     jvmToolchain(javaVersion.majorVersion.toInt())
 }
 
+java {
+    withSourcesJar()
+}
+
 tasks.jar {
     manifest.attributes.also {
         it["Implementation-Title"] = project.name
@@ -62,7 +67,25 @@ publishing {
             version = project.version.toString()
 
             from(components["java"])
-            artifact(sourceJar)
+//            artifact(sourceJar)
+
+            pom {
+                name = project.name
+                description = "ULID for Kotlin JVM Project"
+                url = "https://github.com/codexwr/ULID"
+                licenses {
+                    license {
+                        name = "The Apache License, Version 2.0"
+                        url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+                    }
+                }
+                developers {
+                    developer {
+                        id = "codexwr"
+                        name = "codexwr"
+                    }
+                }
+            }
         }
     }
     repositories {
