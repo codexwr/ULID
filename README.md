@@ -11,6 +11,10 @@ allprojects {
     repositories {
         maven {
             url = uri("https://maven.pkg.github.com/codexwr/ULID")
+            credentials {
+                username = "github username"
+                password = "access token"  // The access token must contain 'read:packages' permission.
+            }
         }
     }
 }
