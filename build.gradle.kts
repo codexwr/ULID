@@ -10,7 +10,7 @@ val javaVersion = JavaVersion.VERSION_1_8
 java.sourceCompatibility = javaVersion
 
 group = "com.chans.codexwr"
-version = "1.0.0"
+version = "1.0.1"
 
 repositories {
     mavenCentral()
