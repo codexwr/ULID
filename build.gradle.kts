@@ -9,8 +9,8 @@ plugins {
 val javaVersion = JavaVersion.VERSION_1_8
 java.sourceCompatibility = javaVersion
 
-group = "com.chans.codexwr"
-version = "1.0.1"
+group = "com.github.codexwr"
+version = "1.0.2"
 
 repositories {
     mavenCentral()
@@ -72,7 +72,7 @@ publishing {
             pom {
                 name = project.name
                 description = "ULID for Kotlin JVM Project"
-                url = "https://github.com/codexwr/ULID"
+                url = "https://github.com/codexwr/ulid"
                 licenses {
                     license {
                         name = "The Apache License, Version 2.0"

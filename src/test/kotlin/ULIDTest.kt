@@ -1,5 +1,5 @@
-import com.chans.codexwr.ULID
-import com.chans.codexwr.ULIDJava
+import com.github.codexwr.ULID
+import com.github.codexwr.ULIDJava
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.DisplayName

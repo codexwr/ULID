@@ -1,4 +1,4 @@
-package com.chans.codexwr
+package com.github.codexwr
 
 import java.io.Serializable
 import java.security.SecureRandom

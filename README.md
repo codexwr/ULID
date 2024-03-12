@@ -10,7 +10,7 @@ Add the *GitHub repository* or *Jitpack* to your `build.gradle.kts`:
 repositories {
     // github packages
     maven {
-        url = uri("https://maven.pkg.github.com/codexwr/ULID")
+        url = uri("https://maven.pkg.github.com/codexwr/ulid")
         credentials {
             username = "github username"
             password = "access token"  // The access token must contain 'read:packages' permission.
@@ -26,10 +26,7 @@ repositories {
 Add the dependency to your `build.gradle.kts`:
 ```kotlin
 dependencies {
-    // github packages
-    implementation("com.chans.codexwr:ulid:1.0.1")
-    // or Jitpack 
-    implementation("com.github.codexwr:ULID:1.0.1")
+    implementation("com.github.codexwr:ulid:1.0.2")
 }
 ```
 ## Usage
