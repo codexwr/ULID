@@ -5,25 +5,26 @@ It has been converted for use in JVM Kotlin projects from the Java source code [
 
 
 ## Installation
-Add the GitHub repository to your `build.gradle.kts`:
+Add the *GitHub repository* or *Jitpack* to your `build.gradle.kts`:
 ```kotlin
-allprojects {
-    repositories {
-        maven {
-            url = uri("https://maven.pkg.github.com/codexwr/ULID")
-            credentials {
-                username = "github username"
-                password = "access token"  // The access token must contain 'read:packages' permission.
-            }
+repositories {
+    // github packages
+    maven {
+        url = uri("https://maven.pkg.github.com/codexwr/ULID")
+        credentials {
+            username = "github username"
+            password = "access token"  // The access token must contain 'read:packages' permission.
         }
     }
+    // or Jitpack
+    maven { url 'https://jitpack.io' }
 }
 ```
 
 Add the dependency to your `build.gradle.kts`:
 ```kotlin
 dependencies {
-    implementation("com.chans.codexwr:ulid:1.0.0")
+    implementation("com.chans.codexwr:ulid:1.0.1")
 }
 ```
 ## Usage
