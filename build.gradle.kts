@@ -91,10 +91,10 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages" //GitHub Package Repository
-            url = uri(project.findProperty("gpr.url") as? String? ?: System.getenv("GPR_URL"))
+            url = uri(System.getenv("GPR_URL") ?: project.findProperty("gpr.url") as String)
             credentials {
-                username = project.findProperty("gpr.username") as? String? ?: System.getenv("GPR_USERNAME")
-                password = project.findProperty("gpr.password") as? String? ?: System.getenv("GPR_PASSWORD")
+                username = System.getenv("GPR_USERNAME") ?: project.findProperty("gpr.username") as String
+                password = System.getenv("GPR_PASSWORD") ?: project.findProperty("gpr.password") as String
             }
         }
     }
