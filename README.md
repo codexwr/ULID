@@ -17,14 +17,19 @@ repositories {
         }
     }
     // or Jitpack
-    maven { url 'https://jitpack.io' }
+    maven {
+        url = uri("https://jitpack.io")
+    }
 }
 ```
 
 Add the dependency to your `build.gradle.kts`:
 ```kotlin
 dependencies {
+    // github packages
     implementation("com.chans.codexwr:ulid:1.0.1")
+    // or Jitpack 
+    implementation("com.github.codexwr:ULID:1.0.1")
 }
 ```
 ## Usage
