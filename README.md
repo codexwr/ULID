@@ -1,3 +1,5 @@
+[![Release](https://jitpack.io/v/codexwr/ulid.svg)](https://jitpack.io/#codexwr/ulid)
+
 # Universally Unique Lexicographically Sortable Identifier
 This is a ULID library for the Kotlin version. <br/>
 
@@ -8,17 +10,18 @@ It has been converted for use in JVM Kotlin projects from the Java source code [
 Add the *GitHub repository* or *Jitpack* to your `build.gradle.kts`:
 ```kotlin
 repositories {
-    // github packages
+    // Jitpack
+    maven {
+        url = uri("https://jitpack.io")
+    }
+
+    // or Github packages
     maven {
         url = uri("https://maven.pkg.github.com/codexwr/ulid")
         credentials {
             username = "github username"
             password = "access token"  // The access token must contain 'read:packages' permission.
         }
-    }
-    // or Jitpack
-    maven {
-        url = uri("https://jitpack.io")
     }
 }
 ```
