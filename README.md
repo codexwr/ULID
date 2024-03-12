@@ -62,3 +62,6 @@ ULID Value to ULID String:
 ```kotlin
 val ulidString = ULID.nextValue().toString()
 ```
+
+## License
+[Apache License 2.0](https://raw.githubusercontent.com/codexwr/ulid/main/LICENSE)
